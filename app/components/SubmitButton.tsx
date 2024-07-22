@@ -1,5 +1,4 @@
 "use client";
-
 import { useFormStatus } from "react-dom";
 
 export const SubmitButton = ({ title }: { title: string }) => {

@@ -3,6 +3,7 @@ import { useFormState } from "react-dom";
 import { login } from "../actions";
 import { SubmitButton } from "../components/SubmitButton";
 import CopyToClipboardButton from "../components/CopyToClipboardButton";
+import { useAuth } from "../components/AuthContext";
 
 const initialState = {
   message: "",
@@ -11,7 +12,11 @@ const initialState = {
 
 export default function Login() {
   const [state, formAction] = useFormState(login, initialState);
-  console.log("ggg state", state);
+  const { user, setUser } = useAuth();
+  if (state.user) {
+    setUser(state.user);
+  }
+  console.log("ggg user", user);
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -67,13 +72,16 @@ export default function Login() {
               <SubmitButton title="Sign in" />
             </div>
           </form>
-          {state?.message ? (
+          {state?.message || user?.token ? (
             <div className="text-sm text-gray-900 mt-2">
               <p className="mb-2">{state.message}</p>
-              {state.idToken ? (
+              {user?.token ? (
                 <>
-                  <p className="break-words mb-2">idToken: {state.idToken}</p>
-                  <CopyToClipboardButton textToCopy={state.idToken} />
+                  <p className="break-words mb-2">
+                    <span className="text-blue-600 block">idToken:</span>
+                    <span>{user?.token}</span>
+                  </p>
+                  <CopyToClipboardButton textToCopy={user?.token} />
                 </>
               ) : null}
             </div>

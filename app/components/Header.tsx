@@ -1,17 +1,23 @@
+"use client";
 import Link from "next/link";
-import { getCurrentUser } from "aws-amplify/auth";
 import SignOut from "./SignOut";
+import { useAuth } from "./AuthContext";
 
-const Header = async () => {
-  let username;
-  try {
-    username = await getCurrentUser();
-  } catch (e) {}
+const Header = () => {
+  const { user } = useAuth();
 
   return (
     <header className="bg-white">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 px-8">
-        <div>{username ? `Hello, ${username}` : "No User logged in"}</div>
+        <div>
+          {user ? (
+            <>
+              Hello, <span className="text-blue-600">{user.username}</span>
+            </>
+          ) : (
+            "No User logged in"
+          )}
+        </div>
         <div className="flex items-center justify-center gap-6">
           <Link
             href="/login"
