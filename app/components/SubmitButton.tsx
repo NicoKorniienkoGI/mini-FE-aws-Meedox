@@ -2,18 +2,20 @@
 import { useFormStatus } from "react-dom";
 
 export const SubmitButton = ({ title }: { title: string }) => {
-  const { pending } = useFormStatus();
+  let { pending } = useFormStatus();
+
   return (
     <button
       type="submit"
+      disabled={pending}
       className={`flex w-full ${
-        pending ? "bg-gray-400" : "bg-blue-200 hover:bg-blue-500"
-      }  justify-center rounded-md bg-blue2 px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+        pending ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-400"
+      }  justify-center rounded-md bg-blue2 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
     >
       {pending ? (
         <svg
           aria-hidden="true"
-          className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+          className="w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

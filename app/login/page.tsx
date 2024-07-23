@@ -16,7 +16,7 @@ export default function Login() {
   if (state.user) {
     setUser(state.user);
   }
-  console.log("ggg user", user);
+  console.log("user: ", user);
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
