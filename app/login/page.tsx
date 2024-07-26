@@ -78,10 +78,10 @@ export default function Login() {
               {user?.token ? (
                 <>
                   <p className="break-words mb-2">
+                    <CopyToClipboardButton textToCopy={user?.token} />
                     <span className="text-blue-600 block">idToken:</span>
                     <span>{user?.token}</span>
                   </p>
-                  <CopyToClipboardButton textToCopy={user?.token} />
                 </>
               ) : null}
             </div>
